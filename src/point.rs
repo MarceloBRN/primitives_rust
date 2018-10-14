@@ -155,6 +155,12 @@ impl <T: Copy + Clone + Integer + From<i128>> Mul<i128> for Point<T> {
     }
 } 
 
+impl <T: Copy + Clone + Integer + Default> PartialEq for Point<T> {
+    fn eq(&self, other: &Point<T>) -> bool {
+        self.xy() == other.xy()
+    }
+}
+
 impl Mul<f32> for Point<i32> {
     type Output = Self;
     fn mul(self, rhs: f32) -> Self {
@@ -275,5 +281,17 @@ mod test {
 
         let pneg = -p1;
         assert_eq!((-100, -200), pneg.xy());
+
+        let p1 = Point::<i32>::new(100, 200);
+        let p2 = Point::<i32>::new(-100, 200);
+        let p3 = Point::<i32>::new(100, -200);
+        let p4 = Point::<i32>::new(-100, -200);
+        let p5 = Point::<i32>::new(100, 200);
+        assert_eq!(p1 == p2, false);
+        assert_eq!(p1 != p3, true);
+        assert_eq!(p2 != p4, true);
+        assert_eq!(p1 == -p4, true);
+        assert_eq!(p1 == p5, true);
+        
     }
 }
