@@ -1,0 +1,7 @@
+[package]
+name = "primitives_rust"
+version = "0.1.0"
+authors = ["MarceloBRN <marcelognesp@gmail.com>"]
+
+[dependencies]
+num = "0.2"
